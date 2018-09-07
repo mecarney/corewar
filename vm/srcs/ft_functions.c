@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:03:20 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/04 21:30:37 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/07 15:18:25 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define OP_T(op, i)	g_tab[op].param[i]
 
-void	ft_param(int *param, UCHAR *arena, int pc, int size)
+void				ft_param(int *param, UCHAR *arena, int pc, int size)
 {
 	int tmp;
 	int nbr;
@@ -24,13 +24,13 @@ void	ft_param(int *param, UCHAR *arena, int pc, int size)
 	len = size;
 	while (--size >= 0)
 	{
-		ft_memcpy(&tmp, &arena[(pc++) % MEM_SIZE], 1);
+		ft_memcpy(&tmp, &arena[modify_pc(pc++)], 1);
 		nbr = (nbr << 8 & 0xffffff00) | (tmp & 0x000000ff);
 	}
 	*param = (len == 2) ? (short)nbr : nbr;
 }
 
-int		ft_check_param(t_process *p, UCHAR op)
+int					ft_check_param(t_process *p, UCHAR op)
 {
 	int	i;
 
@@ -57,52 +57,25 @@ int		ft_check_param(t_process *p, UCHAR op)
 	return (1);
 }
 
-// void	ft_putarena(UINT param, t_vm *vm, int pc, t_process *pro)
-// {
-// 	int sft;
-// 	int size;
-//
-// 	size = REG_SIZE;
-// 	sft = size - 1;
-// 	while (--size >= 0)
-// 	{
-// 		// vm->arena[(pc + size) % MEM_SIZE] = (param >> 8 * (-size + sft) & 0xff);
-// 		// ft_printf("%x\n", (param >> 8 * (-size + sft) & 0xff));
-// 		vm->territory[(pc + size) % MEM_SIZE] = (param >> 8 * (-size + sft) & 0xff);
-// 	}
-// 	(void)pro;
-// }
-
-void	ft_putarena(UINT param, t_vm *vm, int pc, t_process *pro)
+void				ft_putarena(UINT param, t_vm *vm, int pc, t_process *pro)
 {
-	int i;
-	int	shift;
-	unsigned int tmp;
+	int				i;
+	int				shift;
 
 	i = -1;
 	shift = 32;
 	if (pc < 0)
-		pc = MEM_SIZE - pc;
+		pc = modify_pc(pc);
 	while (++i < REG_SIZE)
 	{
-			// ft_printf("param: %p, vm->pro: %p cycle: %d\n", &param, vm->pro_lst, vm->vm_cycle);
-		pc = (pc % MEM_SIZE);
-		tmp = param >> (shift -= 8) & 0xff;
-		// ft_printf("tmp: %d, pc: %d\n", tmp, pc);
-		vm->arena[pc] = tmp;
+		pc = modify_pc(pc);
+		vm->arena[pc] = param >> (shift -= 8) & 0xff;
 		vm->territory[pc] = pro->owner;
-		pc += 1;
+		pc++;
 	}
-	(void)pro;
 }
 
-int		ft_return_error(char const *str)
-{
-	ft_putendl(str);
-	exit(EXIT_FAILURE);
-}
-
-int		modify_pc(int pc)
+int					modify_pc(int pc)
 {
 	if (pc < 0)
 		pc = MEM_SIZE + pc;

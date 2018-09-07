@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:33:07 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/05 16:54:59 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/07 15:06:37 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_load_index(t_vm *vm, t_process *p)
 	int	value[3];
 
 	i = -1;
-	if (ft_check_param(p, vm->arena[p->pc]))
+	if (ft_check_param(p, p->op))
 	{
 		while (++i < 2)
 		{
@@ -36,18 +36,15 @@ void	ft_load_index(t_vm *vm, t_process *p)
 		p->carry = (p->reg[REG(2)]) ? 0 : 1;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
-	// p->op_delay = g_tab[vm->arena[p->pc]].cycles;
 }
 
 void	ft_store_index(t_vm *vm, t_process *p)
 {
 	int	i;
-	int	reg;
 	int	value[3];
 
 	i = 0;
-	reg = p->value_p[0] - 1;
-	if (ft_check_param(p, vm->arena[p->pc]))
+	if (ft_check_param(p, p->op))
 	{
 		while (++i < 3)
 		{
@@ -60,40 +57,38 @@ void	ft_store_index(t_vm *vm, t_process *p)
 					modify_pc(p->pc + (p->value_p[1] % IDX_MOD)), REG_SIZE);
 		}
 		value[0] = value[1] + value[2];
-		// ft_printf("ST: %x| %x\n", p->reg[p->value_p[0] - 1], value[0]);
-		ft_putarena(p->reg[reg], vm, modify_pc((p->pc) + value[0] % IDX_MOD), p);
+		ft_putarena(p->reg[REG(0)], vm,
+				modify_pc((p->pc) + value[0] % IDX_MOD), p);
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
-	// p->op_delay = g_tab[vm->arena[p->pc]].cycles;
 }
 
 void	ft_fork(t_vm *vm, t_process *p)
 {
-	if (ft_check_param(p, vm->arena[p->pc]))
+	if (ft_check_param(p, p->op))
 	{
 		pushfront_process(&(vm->pro_lst),
-			new_process(p, vm->arena[modify_pc(p->pc + p->value_p[0])], IDX_MOD));
+			new_pro(p, vm->arena[modify_pc(p->pc + p->value_p[0])], IDX_MOD));
 		vm->nbr_of_processes++;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
-	// p->op_delay = g_tab[vm->arena[p->pc]].cycles;
 }
 
 void	ft_long_load(t_vm *vm, t_process *p)
 {
 	int	value;
 
-	if (ft_check_param(p, vm->arena[p->pc]))
+	if (ft_check_param(p, p->op))
 	{
 		if (p->type_p[0] == IND_CODE)
-			ft_param(&value, vm->arena, modify_pc(p->pc + p->value_p[0]), REG_SIZE);
+			ft_param(&value, vm->arena,
+				modify_pc(p->pc + p->value_p[0]), REG_SIZE);
 		else
 			value = p->value_p[0];
-		p->reg[p->value_p[1] - 1] = value;
-		p->carry = (p->reg[p->value_p[1] - 1]) ? 0 : 1;
+		p->reg[REG(1)] = value;
+		p->carry = (p->reg[REG(1)]) ? 0 : 1;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
-	// p->op_delay = g_tab[vm->arena[p->pc]].cycles;
 }
 
 void	ft_long_load_index(t_vm *vm, t_process *p)
@@ -102,7 +97,7 @@ void	ft_long_load_index(t_vm *vm, t_process *p)
 	int	value[3];
 
 	i = -1;
-	if (ft_check_param(p, vm->arena[p->pc]))
+	if (ft_check_param(p, p->op))
 	{
 		while (++i < 2)
 		{
@@ -120,5 +115,4 @@ void	ft_long_load_index(t_vm *vm, t_process *p)
 		p->carry = (p->reg[REG(2)]) ? 0 : 1;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
-	// p->op_delay = g_tab[vm->arena[p->pc]].cycles;
 }

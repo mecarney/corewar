@@ -6,18 +6,36 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 06:58:57 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/05 20:29:07 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/07 15:26:55 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_corewar.h"
 
-void	decorate_win(t_vm *vm)
+void			vm_info(t_vm *vm)
 {
-	int	i;
-	int x;
-	int y;
-	t_process	*tmp;
+	int			i;
+	int			y;
+
+	i = -1;
+	while (++i < MAX_PLAYERS)
+		if (vm->p[i].size)
+		{
+			y = (i + 2) * 3;
+			mvprintw(y, 65 * 3, "Player %d: %s", i + 1, vm->p[i].name);
+			mvprintw(y + 1, 65 * 3, "Lives: %d", vm->player_alive[i]);
+		}
+	mvprintw(57, 70 * 3, "%d", vm->ctd);
+	mvprintw(59, 70 * 3, "%d", CYCLE_DELTA);
+	mvprintw(61, 70 * 3, "%d", NBR_LIVE);
+	mvprintw(63, 70 * 3, "%d", MAX_CHECKS);
+}
+
+void			show_territory(t_vm *vm)
+{
+	int			i;
+	int			x;
+	int			y;
 
 	x = 0;
 	y = 0;
@@ -34,6 +52,13 @@ void	decorate_win(t_vm *vm)
 			x = 0;
 		}
 	}
+}
+
+void			decorate_win(t_vm *vm)
+{
+	t_process	*tmp;
+
+	show_territory(vm);
 	attron(A_STANDOUT);
 	tmp = vm->pro_lst;
 	while (tmp)
@@ -44,23 +69,12 @@ void	decorate_win(t_vm *vm)
 	attroff(A_STANDOUT);
 	mvprintw(0, 70 * 3, "%d", vm->vm_cycle);
 	mvprintw(2, 70 * 3, "%d", vm->nbr_of_processes);
-	i = -1;
-	while (++i < MAX_PLAYERS)
-		if (vm->players[i].size)
-		{
-			y = (i + 2) * 3;
-			mvprintw(y, 65 * 3, "Player %d: %s", i + 1, vm->players[i].name);
-			mvprintw(y + 1, 65 * 3, "Lives: %d", vm->player_alive[i]);
-		}
-	mvprintw(57, 70 * 3, "%d", vm->ctd);
-	mvprintw(59, 70 * 3, "%d", CYCLE_DELTA);
-	mvprintw(61, 70 * 3, "%d", NBR_LIVE);
-	mvprintw(63, 70 * 3, "%d", MAX_CHECKS);
+	vm_info(vm);
 	refresh();
-	(vm->vm_cycle > 3000) ? getch() : 0;
+	(vm->vm_cycle > 2700) ? getch() : 0;
 }
 
-void 			base(t_vm *vm)
+void			base(t_vm *vm)
 {
 	clear();
 	mvprintw(0, 65 * 3, "Cycle: ");
@@ -72,7 +86,7 @@ void 			base(t_vm *vm)
 	decorate_win(vm);
 }
 
-void				visualizer(t_vm *vm)
+void			visualizer(t_vm *vm)
 {
 	initscr();
 	leaveok(stdscr, TRUE);

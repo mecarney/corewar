@@ -6,18 +6,18 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/04 22:53:17 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/31 13:33:42 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/07 15:40:29 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-char		*ft_itoa_base_long(uint64_t value, int base)
+char			*ft_itoa_base_long(uint64_t value, int base)
 {
 	static char	basetab[] = "0123456789abcdef";
-	char	*nstr;
-	int		i;
-	uint64_t		nbr;
+	char		*nstr;
+	int			i;
+	uint64_t	nbr;
 
 	nbr = value;
 	i = 1;
@@ -36,7 +36,7 @@ char		*ft_itoa_base_long(uint64_t value, int base)
 	return (nstr);
 }
 
-void		number_long(char **buff, t_var var, va_list ap)
+void			number_long(char **buff, t_var var, va_list ap)
 {
 	int			len;
 	uint64_t	number;
@@ -62,11 +62,11 @@ void		number_long(char **buff, t_var var, va_list ap)
 	*buff = free_join(*buff, str);
 }
 
-void		number_octal(char **buff, t_var var, va_list ap)
+void			number_octal(char **buff, t_var var, va_list ap)
 {
-	int		len;
-	int64_t	number;
-	char	*str;
+	int			len;
+	int64_t		number;
+	char		*str;
 
 	str = ft_strnew(0);
 	number = (int64_t)va_arg(ap, int64_t);
@@ -88,9 +88,9 @@ void		number_octal(char **buff, t_var var, va_list ap)
 	*buff = free_join(*buff, str);
 }
 
-static char	*ft_strtoupper(char *str)
+static char		*ft_strtoupper(char *str)
 {
-	int	i;
+	int			i;
 
 	i = -1;
 	while (str[++i])
@@ -98,7 +98,7 @@ static char	*ft_strtoupper(char *str)
 	return (str);
 }
 
-void		number_hexa(char **buff, t_var var, va_list ap)
+void			number_hexa(char **buff, t_var var, va_list ap)
 {
 	int			len;
 	uint64_t	number;

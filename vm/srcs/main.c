@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:25 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/05 20:02:36 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/07 14:43:15 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_op	g_tab[OP_NUMBER] =
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
-
 
 /*
 ** If there's a -dump, check the next argument for a number greater than zero.
@@ -130,45 +129,10 @@ void				parse_av(int ac, char **av, t_vm *vm)
 }
 
 /*
-** Introduce all players and place them in the arena.
-*/
-
-void				intros(t_vm *vm)
-{
-	unsigned int	i;
-	unsigned int	x;
-
-	i = 0;
-	ft_putendl("Introducing contestants...");
-	while (i < MAX_PLAYERS)
-	{
-		if (vm->players[i].size)
-		{
-			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-						vm->players[i].nbr, vm->players[i].size,
-						vm->players[i].name, vm->players[i].comment);
-			ft_memcpy((char *)(vm->arena + MEM_SIZE / vm->nbrp * i),
-						vm->players[i].code, vm->players[i].size);
-			x = 0;
-			while (x < vm->players[i].size)
-				vm->territory[MEM_SIZE / vm->nbrp * i + x++] = vm->players[i].nbr;
-			pushfront_process(&(vm->pro_lst), new_process(NULL, vm->arena[MEM_SIZE / vm->nbrp * i], 0));
-			vm->pro_lst->live = 0;
-			vm->pro_lst->reg[0] = vm->players[i].nbr * -1;
-			vm->pro_lst->owner = vm->players[i].nbr;
-			vm->pro_lst->pc = MEM_SIZE / vm->nbrp * i;
-			vm->pro_lst->op_delay = g_tab[vm->arena[vm->pro_lst->pc]].cycles - 1;
-			vm->nbr_of_processes++;
-		}
-		i++;
-	}
-}
-
-/*
 ** Set defaults for vm.
 */
 
-void 				defaults(t_vm *vm)
+void				defaults(t_vm *vm)
 {
 	int				i;
 
@@ -184,16 +148,12 @@ void 				defaults(t_vm *vm)
 	while (++i < MAX_PLAYERS)
 	{
 		vm->player_alive[i] = 0;
-		vm->players[i].size = 0;
+		vm->p[i].size = 0;
 	}
 	ft_bzero(vm->last_live, MAX_PLAYERS * 4);
 	ft_bzero(vm->arena, MEM_SIZE);
 	ft_bzero(vm->territory, MEM_SIZE);
 }
-
-/*
-** TODO: Handle leaks.
-*/
 
 int					main(int ac, char **av)
 {
@@ -201,6 +161,7 @@ int					main(int ac, char **av)
 
 	defaults(&vm);
 	parse_av(ac, av, &vm);
+	(vm.nbrp < 1) ? ft_return_error("Not enough players.") : 0;
 	intros(&vm);
 	(vm.v & 1) ? visualizer(&vm) : start(&vm);
 	(vm.v & 1) ? endwin() : 0;

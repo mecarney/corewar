@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 00:22:43 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/05 19:01:38 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/07 14:56:50 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		ft_instruction_edge(t_process *p, UCHAR op)
 int		ft_instruction(t_process *p, UCHAR op, UCHAR op_type)
 {
 	int i;
+	int mercy;
 	int byte;
 	int shift;
 
@@ -30,6 +31,7 @@ int		ft_instruction(t_process *p, UCHAR op, UCHAR op_type)
 		return (ft_instruction_edge(p, op));
 	i = -1;
 	shift = 8;
+	mercy = 1;
 	while (++i < g_tab[op].arg_nbr && op != 0)
 	{
 		p->type_p[i] = (op_type >> (shift -= 2) & 3);
@@ -40,11 +42,11 @@ int		ft_instruction(t_process *p, UCHAR op, UCHAR op_type)
 		else if (p->type_p[i] == IND_CODE)
 			p->size_p[i] = 2;
 		else
-			return (0);
+			mercy = 0;
 	}
 	byte = g_tab[op].is_coding_byte;
 	p->size_instruction = 1 + byte + p->size_p[0] + p->size_p[1] + p->size_p[2];
-	return (1);
+	return (mercy);
 }
 
 void	ft_add_param(t_process *p, UCHAR *arena, int op_code)
@@ -74,30 +76,19 @@ void	ft_init_player(t_process *p)
 
 int		ft_decode(t_process *p, UCHAR *arena)
 {
-	int i;
-	int	op;
-
-	op = arena[p->pc % MEM_SIZE];
 	ft_init_player(p);
-	// if (p->op_delay > 0 || op == 0)
-	i = -1;
-	while (++i < OP_NUMBER)
-	{
-		if (g_tab[i].opcode == op)
-			break ;
-	}
-	if (g_tab[i].opcode != op)
+	if (!(0 <= p->op && p->op < OP_NUMBER))
 	{
 		p->pc = modify_pc(p->pc + 1);
 		p->op_delay = 0;
 		return (0);
 	}
-	if (!ft_instruction(p, op, arena[(p->pc + 1) % MEM_SIZE]))
+	if (!ft_instruction(p, p->op, arena[(p->pc + 1) % MEM_SIZE]))
 	{
-		p->pc = modify_pc(p->pc + 2);
+		p->pc = modify_pc(p->pc + p->size_instruction);
 		p->op_delay = 0;
 		return (0);
 	}
-	ft_add_param(p, arena, op);
+	ft_add_param(p, arena, p->op);
 	return (1);
 }
