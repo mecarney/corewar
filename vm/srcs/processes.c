@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:11:05 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/13 19:37:22 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:05:20 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			free_processes(t_process **pro_lst)
 	*pro_lst = NULL;
 }
 
-t_process		*new_pro(t_process *old, int op, int idx)
+t_process		*new_pro(t_process *old, int op)
 {
 	int			i;
 	t_process	*new;
@@ -88,8 +88,10 @@ t_process		*new_pro(t_process *old, int op, int idx)
 	ft_memset(&(new->reg), 0, (REG_NUMBER) * sizeof(REG_SIZE));
 	if (old)
 	{
-		new->pc = (idx) ? modify_pc(old->pc + (old->value_p[0] % idx))
-						: modify_pc(old->pc + (old->value_p[0]));
+		if (old->op == 12)
+			new->pc = modify_pc(old->pc + (old->value_p[0] % IDX_MOD));
+		else
+			new->pc = modify_pc(old->pc + (old->value_p[0]));
 		new->carry = old->carry;
 		new->owner = old->owner;
 		new->live = old->live;

@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:07:42 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/13 19:37:28 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 08:43:47 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_live(t_vm *vm, t_process *p)
 	vm->nbr_lives++;
 	if (ft_check_param(p, p->op) && live > 0 && live <= MAX_PLAYERS)
 	{
-		vm->player_alive[live - 1]++;
 		vm->last_live[live - 1] = vm->vm_cycle;
+		vm->player_alive[live - 1]++;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
 }

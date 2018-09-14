@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:46 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/10 16:06:59 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 16:21:59 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void				intros(t_vm *vm)
 			x = 0;
 			while (x < vm->p[i].size)
 				vm->territory[pc + x++] = vm->p[i].nbr;
-			pushfront_process(&(vm->pro_lst), new_pro(NULL, vm->arena[pc], 0));
+			pushfront_process(&(vm->pro_lst), new_pro(NULL, vm->arena[pc]));
 			vm->pro_lst->reg[0] = vm->p[i].nbr * -1;
 			vm->pro_lst->owner = vm->p[i].nbr;
 			vm->pro_lst->pc = pc;
@@ -68,24 +68,23 @@ void				validate_p(char *file)
 
 /*
 ** Store each player in the t_vm struct which has a array of player structs
-** that should probably be malloced but I took a lazy route. TODO: check magic.
-** 		// unsigned int	magic[4];
-**		// read(fd, &magic[3], 1);
-**		// read(fd, &magic[2], 1);
-**		// read(fd, &magic[1], 1);
-**		// read(fd, &magic[0], 1);
-**		// if (*(unsigned int *)magic != COREWAR_EXEC_MAGIC)
-**		// 	ft_return_error("Error: incorrect magic number");
+** and validate magic_number.
 */
 
 void				store_p(char *file, t_vm *vm, int nbr)
 {
 	int				fd;
 	int				size;
+	unsigned char	magic_number[4];
 
 	if ((fd = open(file, O_RDONLY)) != -1)
 	{
-		lseek(fd, 4, SEEK_CUR);
+		read(fd, &magic_number[3], 1);
+		read(fd, &magic_number[2], 1);
+		read(fd, &magic_number[1], 1);
+		read(fd, &magic_number[0], 1);
+		if (*(unsigned int *)magic_number != COREWAR_EXEC_MAGIC)
+			ft_return_error("Error: invalid magic_number");
 		size = read(fd, &(vm->p[nbr].name), PROG_NAME_LENGTH + 4);
 		vm->p[nbr].name[size] = '\0';
 		lseek(fd, 4, SEEK_CUR);

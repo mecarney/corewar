@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:25 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/10 21:17:02 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:54:07 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ void				n_flag(int ac, char **av, t_vm *vm, int *i)
 {
 	char			*s;
 
-	if (*i + 1 < ac && '0' < av[*i + 1][0]
-		&& ft_atoi(av[*i + 1]) <= MAX_PLAYERS
+	if (!(ft_atoi(av[*i + 1]) <= MAX_PLAYERS && ft_atoi(av[*i + 1]) != 0))
+		ft_return_error("Error: invalid player number");
+	else if (*i + 1 < ac && '0' < av[*i + 1][0]
 		&& *i + 2 < ac && (s = ft_strstr(av[*i + 2], ".cor"))
 		&& s != av[*i + 2] && !s[4])
 	{
@@ -141,6 +142,7 @@ void				defaults(t_vm *vm)
 	vm->ctd = CYCLE_TO_DIE;
 	vm->vm_cycle = 0;
 	vm->new_cycles = 0;
+	vm->ttd_cycles = 0;
 	vm->dump_cycle = -1;
 	vm->v &= 0;
 	vm->nbr_of_processes = 0;
@@ -160,11 +162,15 @@ int					main(int ac, char **av)
 {
 	t_vm			vm;
 
+	if (ac == 1)
+	{
+		ft_putstr("./corewar [-v] [-dump nbr_cycles] [[-n number]");
+		ft_return_error(" champion1.cor]");
+	}
 	defaults(&vm);
 	parse_av(ac, av, &vm);
 	(vm.nbrp < 1) ? ft_return_error("Not enough players.") : 0;
 	intros(&vm);
 	(vm.v & 1) ? visualizer(&vm) : start(&vm);
-	(vm.v & 1) ? endwin() : 0;
 	return (0);
 }

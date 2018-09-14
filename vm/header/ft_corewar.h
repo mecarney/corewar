@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 19:45:48 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/13 19:12:00 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:37:04 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define UINT unsigned int
 # define UCHAR unsigned char
 # define REG(x) p->value_p[x] - 1
-# define TIME_TO_DIE vm->new_cycles / MAX_CHECKS == vm->ctd || vm->ctd < 0
+# define TIME_TO_DIE vm->ttd_cycles / MAX_CHECKS == vm->ctd || vm->ctd < 0
 
 typedef struct		s_pro
 {
@@ -74,11 +74,12 @@ typedef struct		s_vm
 	unsigned int	dump_cycle;
 	unsigned int	vm_cycle;
 	unsigned int	new_cycles;
+	unsigned int	ttd_cycles;
 	unsigned int	cycle_to_die;
 
 	unsigned int	nbrp;
 	unsigned int	player_alive[MAX_PLAYERS];
-	unsigned char	last_live[MAX_PLAYERS];
+	unsigned int	last_live[MAX_PLAYERS];
 	t_player		p[MAX_PLAYERS];
 	unsigned int	nbr_lives;
 
@@ -102,7 +103,7 @@ void				new_p(char **av, int i, t_vm *vm);
 void				new_pn(char **av, int i, t_vm *vm);
 void				print_arena(t_vm *v);
 void				pushfront_process(t_process **alst, t_process *new);
-t_process			*new_pro(t_process *old, int pc, int idx);
+t_process			*new_pro(t_process *old, int pc);
 void				free_processes(t_process **pro_lst);
 void				start(t_vm *vm);
 void				execute_processes(t_process *pro_lst, t_vm *vm);

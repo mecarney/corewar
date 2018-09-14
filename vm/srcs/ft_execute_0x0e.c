@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:33:07 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/13 10:45:49 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:05:30 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_fork(t_vm *vm, t_process *p)
 	if (ft_check_param(p, p->op))
 	{
 		pushfront_process(&(vm->pro_lst),
-			new_pro(p, vm->arena[modify_pc(p->pc + p->value_p[0])], IDX_MOD));
+			new_pro(p, vm->arena[modify_pc(p->pc + p->value_p[0] % IDX_MOD)]));
 		vm->nbr_of_processes++;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);

@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:03:20 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/07 15:18:25 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:00:46 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void				ft_putarena(UINT param, t_vm *vm, int pc, t_process *pro)
 
 int					modify_pc(int pc)
 {
+	pc = pc % MEM_SIZE;
 	if (pc < 0)
 		pc = MEM_SIZE + pc;
-	pc = pc % MEM_SIZE;
 	return (pc);
 }

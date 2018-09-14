@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 06:58:57 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/13 17:13:11 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:22:46 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void			vm_info(t_vm *vm)
 	while (++i < MAX_PLAYERS)
 		if (vm->p[i].size)
 		{
-			y = (i + 2) * 3;
-			mvprintw(y, 65 * 3, "Player %d: %s", i + 1, vm->p[i].name);
-			mvprintw(y + 1, 65 * 3, "Lives: %d", vm->player_alive[i]);
+			y = (i + 2) * 4;
+			mvprintw(y, 195, "Player %d: %s", i + 1, vm->p[i].name);
+			mvprintw(y + 1, 195, "Lives:");
+			mvprintw(y + 2, 195, "Last Live:");
+			mvprintw(y + 1, 210, "%d", vm->player_alive[i]);
+			mvprintw(y + 2, 210, "%d", vm->last_live[i]);
 		}
-	mvprintw(57, 70 * 3, "%d", vm->ctd);
+	mvprintw(57, 210, "%d", vm->ctd);
 }
 
 void			show_territory(t_vm *vm)
@@ -64,25 +67,25 @@ void			decorate_win(t_vm *vm)
 		tmp = tmp->next;
 	}
 	attroff(A_STANDOUT);
-	mvprintw(0, 70 * 3, "%d", vm->vm_cycle);
-	mvprintw(2, 70 * 3, "%d", vm->nbr_of_processes);
+	mvprintw(1, 210, "%d", vm->vm_cycle);
+	mvprintw(3, 210, "%d", vm->nbr_of_processes);
 	vm_info(vm);
 	refresh();
-	(vm->vm_cycle > 4200) ? getch() : 0;
+	(vm->vm_cycle > 1000004400) ? getch() : 0;
 }
 
 void			base(t_vm *vm)
 {
 	clear();
-	mvprintw(0, 65 * 3, "Cycle: ");
-	mvprintw(2, 65 * 3, "Processes: ");
-	mvprintw(57, 65 * 3, "CYCLE_TO_DIE: ");
-	mvprintw(59, 65 * 3, "CYCLE_DELTA: ");
-	mvprintw(61, 65 * 3, "NBR_LIVE: ");
-	mvprintw(63, 65 * 3, "MAX_CHECKS: ");
-	mvprintw(59, 70 * 3, "%d", CYCLE_DELTA);
-	mvprintw(61, 70 * 3, "%d", NBR_LIVE);
-	mvprintw(63, 70 * 3, "%d", MAX_CHECKS);
+	mvprintw(1, 195, "Cycle: ");
+	mvprintw(3, 195, "Processes: ");
+	mvprintw(57, 195, "CYCLE_TO_DIE: ");
+	mvprintw(59, 195, "CYCLE_DELTA: ");
+	mvprintw(61, 195, "NBR_LIVE: ");
+	mvprintw(63, 195, "MAX_CHECKS: ");
+	mvprintw(59, 210, "%d", CYCLE_DELTA);
+	mvprintw(61, 210, "%d", NBR_LIVE);
+	mvprintw(63, 210, "%d", MAX_CHECKS);
 	decorate_win(vm);
 }
 
