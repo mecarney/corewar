@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:59 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/07 14:19:14 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/13 19:33:39 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int			ft_champs_return(t_vm *vm)
 	int		player;
 
 	i = -1;
-	player = 0;
+	while (++i < MAX_PLAYERS)
+		(vm->p[i].size) ? player = i : 0;
+	i = -1;
 	while (++i < MAX_PLAYERS)
 	{
-		if (vm->last_live[player] < vm->last_live[i])
+		if (vm->p[i].size && vm->last_live[i] > vm->last_live[player])
 			player = i;
 	}
 	return (player);
@@ -50,18 +52,18 @@ void		loop(t_vm *vm)
 	i = -1;
 	while (++i < MAX_PLAYERS)
 		(vm->p[i].size) ? p_alive += vm->player_alive[i] : 0;
-	if (++vm->new_cycles % vm->ctd == 0)
+	if (++vm->new_cycles % vm->ctd == 0 || TIME_TO_DIE)
 	{
-		kill_processes(&(vm->pro_lst), &vm->nbr_of_processes);
-		i = -1;
-		while (++i < MAX_PLAYERS)
-			(vm->p[i].size) ? vm->player_alive[i] = 0 : 0;
-		(vm->v & 1) ? base(vm) : 0;
-	}
-	else if ((vm->new_cycles % vm->ctd == 0 && p_alive >= NBR_LIVE)
-		|| vm->new_cycles / MAX_CHECKS == vm->ctd || vm->ctd < 0)
-	{
-		vm->ctd -= CYCLE_DELTA;
+		if (vm->new_cycles % vm->ctd == 0)
+		{
+			kill_processes(&(vm->pro_lst), &vm->nbr_of_processes);
+			i = -1;
+			while (++i < MAX_PLAYERS)
+				(vm->p[i].size) ? vm->player_alive[i] = 0 : 0;
+		}
+		if (vm->nbr_lives >= NBR_LIVE || TIME_TO_DIE)
+			vm->ctd -= CYCLE_DELTA;
+		vm->nbr_lives = 0;
 		vm->new_cycles = 0;
 		(vm->v & 1) ? base(vm) : 0;
 	}
@@ -86,6 +88,6 @@ void		start(t_vm *vm)
 	else
 	{
 		i = ft_champs_return(vm);
-		ft_printf("Contestant %d, \"%s\", has won!\n", i + 1, vm->p[i].name);
+		ft_printf("Contestant %d, \"%s\", has won !\n", i + 1, vm->p[i].name);
 	}
 }

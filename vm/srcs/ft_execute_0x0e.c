@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:33:07 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/07 15:06:37 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/13 10:45:49 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	ft_load_index(t_vm *vm, t_process *p)
 				value[i] = p->value_p[i];
 			else if (p->type_p[i] == IND_CODE)
 				ft_param(&value[i], vm->arena,
-					modify_pc(p->pc + p->value_p[i]), IND_SIZE);
+					modify_pc(p->pc + p->value_p[i] % IDX_MOD), REG_SIZE);
 		}
 		value[2] = value[0] + value[1];
 		ft_param(&p->reg[REG(2)], vm->arena,
 			modify_pc(p->pc + (value[2] % IDX_MOD)), REG_SIZE);
-		p->carry = (p->reg[REG(2)]) ? 0 : 1;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
 }

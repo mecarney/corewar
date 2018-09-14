@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 06:58:57 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/07 15:26:55 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/13 17:13:11 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ void			vm_info(t_vm *vm)
 			mvprintw(y + 1, 65 * 3, "Lives: %d", vm->player_alive[i]);
 		}
 	mvprintw(57, 70 * 3, "%d", vm->ctd);
-	mvprintw(59, 70 * 3, "%d", CYCLE_DELTA);
-	mvprintw(61, 70 * 3, "%d", NBR_LIVE);
-	mvprintw(63, 70 * 3, "%d", MAX_CHECKS);
 }
 
 void			show_territory(t_vm *vm)
@@ -71,7 +68,7 @@ void			decorate_win(t_vm *vm)
 	mvprintw(2, 70 * 3, "%d", vm->nbr_of_processes);
 	vm_info(vm);
 	refresh();
-	(vm->vm_cycle > 2700) ? getch() : 0;
+	(vm->vm_cycle > 4200) ? getch() : 0;
 }
 
 void			base(t_vm *vm)
@@ -83,6 +80,9 @@ void			base(t_vm *vm)
 	mvprintw(59, 65 * 3, "CYCLE_DELTA: ");
 	mvprintw(61, 65 * 3, "NBR_LIVE: ");
 	mvprintw(63, 65 * 3, "MAX_CHECKS: ");
+	mvprintw(59, 70 * 3, "%d", CYCLE_DELTA);
+	mvprintw(61, 70 * 3, "%d", NBR_LIVE);
+	mvprintw(63, 70 * 3, "%d", MAX_CHECKS);
 	decorate_win(vm);
 }
 

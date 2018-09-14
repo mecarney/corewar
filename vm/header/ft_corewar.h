@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 19:45:48 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/07 14:51:21 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/13 19:12:00 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define UINT unsigned int
 # define UCHAR unsigned char
 # define REG(x) p->value_p[x] - 1
+# define TIME_TO_DIE vm->new_cycles / MAX_CHECKS == vm->ctd || vm->ctd < 0
 
 typedef struct		s_pro
 {
@@ -79,6 +80,7 @@ typedef struct		s_vm
 	unsigned int	player_alive[MAX_PLAYERS];
 	unsigned char	last_live[MAX_PLAYERS];
 	t_player		p[MAX_PLAYERS];
+	unsigned int	nbr_lives;
 
 	unsigned int	v : 1;
 }					t_vm;

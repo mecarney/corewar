@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:25 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/07 14:43:15 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/10 21:17:02 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void				defaults(t_vm *vm)
 	vm->dump_cycle = -1;
 	vm->v &= 0;
 	vm->nbr_of_processes = 0;
+	vm->nbr_lives = 0;
 	i = -1;
 	while (++i < MAX_PLAYERS)
 	{
