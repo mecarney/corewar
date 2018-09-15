@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_helperfunctions.c                               :+:      :+:    :+:   */
+/*   ft_converser_free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 14:50:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/12 20:01:10 by mjacques         ###   ########.fr       */
+/*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
+/*   Updated: 2018/09/11 17:24:59 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
-
-int		handle_null(char *str)
-{
-	if (str == NULL)
-		return (-1);
-	return (ft_strlen(str));
-}
 
 char	*free_str(char *str, char *newstr)
 {
@@ -46,27 +39,34 @@ char	*free_append(char *s1, char s)
 	return (s1);
 }
 
-char	*ft_appendwchar(char *buff, wchar_t c)
+char	*ft_appendwchar(char *str, wchar_t c)
 {
 	if (c <= 0x7f)
-		buff = ft_strappend(buff, c);
+		str = ft_strappend(str, c);
 	else if (c <= 0x7ff)
 	{
-		buff = ft_strappend(buff, (c >> 6) + 0xC0);
-		buff = ft_strappend(buff, (c & 0x3f) + 0x80);
+		str = ft_strappend(str, (c >> 6) + 0xC0);
+		str = free_append(str, (c & 0x3f) + 0x80);
 	}
 	else if (c <= 0xffff)
 	{
-		buff = ft_strappend(buff, (c >> 12) + 0xE0);
-		buff = ft_strappend(buff, (c >> 6 & 0x3F) + 0x80);
-		buff = ft_strappend(buff, (c & 0x3F) + 0x80);
+		str = ft_strappend(str, (c >> 12) + 0xE0);
+		str = free_append(str, (c >> 6 & 0x3F) + 0x80);
+		str = free_append(str, (c & 0x3F) + 0x80);
 	}
 	else if (c <= 0x10ffff)
 	{
-		buff = ft_strappend(buff, (c >> 18) + 0xF0);
-		buff = ft_strappend(buff, ((c >> 12) & 0x3F) + 0x80);
-		buff = ft_strappend(buff, ((c >> 6) & 0x3F) + 0x80);
-		buff = ft_strappend(buff, (c & 0x3F) + 0x80);
+		str = ft_strappend(str, (c >> 18) + 0xF0);
+		str = free_append(str, ((c >> 12) & 0x3F) + 0x80);
+		str = free_append(str, ((c >> 6) & 0x3F) + 0x80);
+		str = free_append(str, (c & 0x3F) + 0x80);
 	}
-	return (buff);
+	return (str);
+}
+
+void	ft_converser_finish(char *str)
+{
+	g_bytes += ft_strlen(str);
+	ft_putstr(str);
+	ft_strdel(&str);
 }

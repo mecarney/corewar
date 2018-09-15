@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 11:39:42 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/31 13:46:11 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/15 09:45:07 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 # include <string.h>
 
 # define ISSPACE(str) (str == ' ' || str == '\t' || str == '\n')
@@ -90,13 +91,16 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 char				*ft_strappend(char *str, char c);
-char				*ft_strlcpy(const char *src, size_t len);
-char				*ft_itoa_base(int64_t value, int base);
+char				*ft_strmcpy(const char *src, size_t len);
+char				*ft_itoa_base(int64_t value, int base, const char *basetab);
 
 void				ft_putwchar(wchar_t c);
 void				ft_putwstr(wchar_t *str);
 size_t				ft_wcharlen(wchar_t c);
 size_t				ft_wstrlen(wchar_t *str);
+
+uint32_t			swap_int32(uint32_t x);
+uint64_t			swap_int64(uint64_t x);
 
 int					ft_return_error(char const *str);
 #endif

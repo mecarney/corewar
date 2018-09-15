@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_return_error.c                                  :+:      :+:    :+:   */
+/*   ft_strmcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 07:09:42 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/15 09:50:57 by mcarney          ###   ########.fr       */
+/*   Created: 2018/07/25 23:40:47 by mjacques          #+#    #+#             */
+/*   Updated: 2018/09/10 11:51:17 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-int		ft_return_error(char const *str)
+char	*ft_strmcpy(const char *src, size_t len)
 {
-	ft_putendl(str);
-	exit(EXIT_FAILURE);
+	char	*dst;
+	size_t	i;
+
+	dst = (char *)malloc(sizeof(char) * (len + 1));
+	i = -1;
+	while (src[++i] && i < len)
+		dst[i] = src[i];
+	dst[i] = '\0';
+	return (dst);
 }

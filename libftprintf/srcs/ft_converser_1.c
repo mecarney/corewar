@@ -1,53 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_converser_c_s.c                                 :+:      :+:    :+:   */
+/*   ft_converser_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/04 22:49:53 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/12 20:01:02 by mjacques         ###   ########.fr       */
+/*   Created: 2018/09/10 19:51:30 by mjacques          #+#    #+#             */
+/*   Updated: 2018/09/11 17:25:11 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	string_new(char **buff, t_var var, va_list ap)
+void	ft_converser_procent(t_var var, va_list ap)
+{
+	char	*str;
+
+	(void)ap;
+	str = ft_strdup("%");
+	if (var.width > 1)
+		str = free_str(str, ft_width_string(str, var, 1));
+	ft_converser_finish(str);
+}
+
+void	ft_converser_string(t_var var, va_list ap)
 {
 	int		len;
 	char	*str;
 
-	if (var.converser == 'S' || (var.type[0] == 'l' && var.type[1] == '\0'))
-		wstring_new(buff, var, ap);
+	if (var.type[0] == 'l' && var.type[1] == '\0')
+		ft_converser_wstring(var, ap);
 	else
 	{
 		str = (char *)va_arg(ap, wchar_t *);
-		if (handle_null(str) == -1)
-			*buff = free_join(*buff, "(null)");
+		if (!str)
+			str = ft_strdup("(null)");
 		else
 		{
 			str = ft_strdup(str);
 			len = ft_strlen(str);
 			if (var.precision != -1 && var.precision < len)
-				str = free_str(str, fct_precision(str, var));
+				str = free_str(str, ft_precision_string(str, var));
 			len = ft_strlen(str);
 			if (var.width > len)
-				str = free_str(str, fct_width_new(str, var, len));
-			*buff = free_join(*buff, str);
+				str = free_str(str, ft_width_string(str, var, len));
 		}
+		ft_converser_finish(str);
 	}
 }
 
-void	wstring_new(char **buff, t_var var, va_list ap)
+void	ft_converser_wstring(t_var var, va_list ap)
 {
 	int		i;
 	int		len;
-	wchar_t	*wstr;
 	char	*str;
+	wchar_t	*wstr;
 
 	wstr = (wchar_t *)va_arg(ap, wchar_t *);
-	if (handle_null((char *)wstr) == -1)
-		*buff = free_join(*buff, "(null)");
+	if (!wstr)
+		str = ft_strdup("(null)");
 	else
 	{
 		len = ft_wstrlen(wstr);
@@ -57,31 +68,41 @@ void	wstring_new(char **buff, t_var var, va_list ap)
 			str = free_str(str, ft_appendwchar(str, wstr[i]));
 		str[i] = '\0';
 		if (var.precision != -1 && var.precision < len)
-			str = free_str(str, fct_wprecision(wstr, var));
+			str = free_str(str, ft_precision_wstring(wstr, var));
 		len = ft_strlen(str);
 		if (var.width > len)
-			str = free_str(str, fct_width_new(str, var, len));
-		*buff = free_join(*buff, str);
+			str = free_str(str, ft_width_string(str, var, len));
 	}
+	ft_converser_finish(str);
 }
 
-void	char_new(char **buff, t_var var, va_list ap)
+void	ft_converser_char(t_var var, va_list ap)
 {
+	char	c;
 	char	*str;
 
-	if (var.converser == 'C' || (var.type[0] == 'l' && var.type[1] == '\0'))
-		wchar_new(buff, var, ap);
+	str = NULL;
+	if (var.type[0] == 'l' && var.type[1] == '\0')
+		ft_converser_wchar(var, ap);
 	else
 	{
-		str = ft_strnew(1);
-		str[0] = (char)va_arg(ap, int);
-		if (var.width > 1)
-			str = free_str(str, fct_width_new(str, var, 1));
-		*buff = free_join(*buff, str);
+		if (!(c = (char)va_arg(ap, int)))
+		{
+			g_bytes += 1;
+			ft_putchar(c);
+		}
+		else
+		{
+			str = ft_strnew(1);
+			str[0] = c;
+			if (var.width > 1)
+				str = free_str(str, ft_width_string(str, var, 1));
+			ft_converser_finish(str);
+		}
 	}
 }
 
-void	wchar_new(char **buff, t_var var, va_list ap)
+void	ft_converser_wchar(t_var var, va_list ap)
 {
 	int		len;
 	char	*str;
@@ -94,16 +115,6 @@ void	wchar_new(char **buff, t_var var, va_list ap)
 	str[len] = '\0';
 	len = ft_strlen(str);
 	if (var.width > len)
-		str = free_str(str, fct_width_new(str, var, len));
-	*buff = free_join(*buff, str);
-}
-
-void	procent_new(char **buff, t_var var)
-{
-	char	*str;
-
-	str = ft_strdup("%");
-	if (var.width > 1)
-		str = free_str(str, fct_width_new(str, var, 1));
-	*buff = free_join(*buff, str);
+		str = free_str(str, ft_width_string(str, var, len));
+	ft_converser_finish(str);
 }

@@ -5,99 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/29 17:25:48 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/29 04:14:52 by mjacques         ###   ########.fr       */
+/*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
+/*   Updated: 2018/09/11 18:04:26 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void		struct_init(t_var *var)
-{
-	var->flags = ft_strnew(0);
-	var->width = 0;
-	var->precision = -1;
-	var->type = ft_strnew(0);
-	var->converser = 0;
-}
+size_t	g_bytes	= 0;
 
-int			ft_end(char *buff)
+t_conv	g_converser[N_CONVERSER] =
 {
-	int size;
-
-	size = ft_strlen(buff);
-	ft_putstr(buff);
-	free(buff);
-	return (size);
-}
+	{'%', &ft_converser_procent},
+	{'s', &ft_converser_string},
+	{'S', &ft_converser_wstring},
+	{'c', &ft_converser_char},
+	{'C', &ft_converser_wchar},
+	{'p', &ft_converser_void},
+	{'i', &ft_converser_number},
+	{'d', &ft_converser_number},
+	{'D', &ft_converser_number},
+	{'o', &ft_converser_octal},
+	{'O', &ft_converser_octal},
+	{'u', &ft_converser_long},
+	{'U', &ft_converser_long},
+	{'x', &ft_converser_hexa},
+	{'X', &ft_converser_hexa}
+};
 
 int			ft_printf(const char *format, ...)
 {
 	int		i;
-	t_var	var;
 	va_list	ap;
-	char	*buff;
 
-	va_start(ap, format);
-	buff = ft_strnew(0);
 	i = -1;
+	va_start(ap, format);
 	while (format[++i] != '\0')
 	{
-		if (format[i] == '%')
-		{
-			if (format[i + 1] != '\0')
-			{
-				i = ft_check_type(&format[i + 1], &var) + i;
-				if (dispatch(&buff, var, ap) == -1)
-					return (-1);
-			}
-		}
+		if (format[i] == '%' && format[i + 1] != '\0')
+			i += ft_conveser(&format[i + 1], ap);
 		else
-			buff = free_append(buff, format[i]);
+		{
+			ft_putchar(format[i]);
+			g_bytes++;
+		}
 	}
-	ft_end(buff);
 	va_end(ap);
-	return (i);
+	return (g_bytes);
 }
 
-int			dispatch(char **buff, t_var var, va_list ap)
-{
-	char *number;
-
-	if (var.converser == '\0')
-		return (-1);
-	number = ft_strdup("dDi");
-	if (ft_strchr(number, var.converser) != NULL)
-		number_new(buff, var, ap);
-	if (ft_tolower(var.converser) == 'u')
-		number_long(buff, var, ap);
-	if (ft_tolower(var.converser) == 'x')
-		number_hexa(buff, var, ap);
-	if (ft_tolower(var.converser) == 'o')
-		number_octal(buff, var, ap);
-	if (ft_tolower(var.converser) == 's')
-		string_new(buff, var, ap);
-	if (ft_tolower(var.converser) == 'c')
-		char_new(buff, var, ap);
-	if (var.converser == 'p')
-		fct_void(buff, var, ap);
-	if (var.converser == '%')
-		procent_new(buff, var);
-	return (0);
-}
-
-char		*number_flag(char *str, t_var var, int len)
-{
-	int		i;
-	char	*newstr;
-
-	newstr = ft_strnew(len + 1);
-	if (ft_strchr(var.flags, '+'))
-		newstr[0] = '+';
-	else
-		newstr[0] = ' ';
-	i = -1;
-	while (++i < len + 1)
-		newstr[1 + i] = str[i];
-	return (newstr);
-}

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_converser_helper.c                              :+:      :+:    :+:   */
+/*   ft_converser_precision.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/04 22:51:34 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/29 04:15:16 by mjacques         ###   ########.fr       */
+/*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
+/*   Updated: 2018/09/11 17:24:55 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-char	*fct_precision(char *str, t_var var)
+char	*ft_precision_string(char *str, t_var var)
 {
 	int		i;
 	char	*newstr;
@@ -24,7 +24,7 @@ char	*fct_precision(char *str, t_var var)
 	return (newstr);
 }
 
-char	*fct_wprecision(wchar_t *wstr, t_var var)
+char	*ft_precision_wstring(wchar_t *wstr, t_var var)
 {
 	int		i;
 	char	*newstr;
@@ -41,35 +41,7 @@ char	*fct_wprecision(wchar_t *wstr, t_var var)
 	return (newstr);
 }
 
-char	*fct_width_new(char *str, t_var var, int len)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	flags;
-	char	*newstr;
-
-	i = -1;
-	k = 0;
-	flags = ' ';
-	newstr = ft_strnew(var.width);
-	if (ft_strchr(var.flags, '0') != NULL)
-		flags = '0';
-	if ((str[0] == '-' || str[0] == '+' || str[0] == ' ')
-		&& ft_strchr(var.flags, '0'))
-		newstr[0] = str[k++];
-	if (ft_strchr(var.flags, '-') == NULL)
-		while (--var.width >= len)
-			newstr[++i + k] = flags;
-	j = -1;
-	while (++j < len)
-		newstr[++i + k] = str[j + k];
-	while (--var.width >= len)
-		newstr[++i] = ' ';
-	return (newstr);
-}
-
-char	*fct_precision_int(char *str, t_var var, int len)
+char	*ft_precision_int(char *str, t_var var, int len)
 {
 	int		i;
 	int		j;
@@ -89,7 +61,7 @@ char	*fct_precision_int(char *str, t_var var, int len)
 	return (newstr);
 }
 
-char	*fct_precision_hex(char *str, t_var var, int len, int number)
+char	*ft_precision_hex(char *str, t_var var, int len, int number)
 {
 	int		i;
 	int		j;
