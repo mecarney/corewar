@@ -6,13 +6,13 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/11 18:04:26 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/15 10:07:24 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-size_t	g_bytes	= 0;
+size_t	g_bytes = 0;
 
 t_conv	g_converser[N_CONVERSER] =
 {
@@ -53,4 +53,3 @@ int			ft_printf(const char *format, ...)
 	va_end(ap);
 	return (g_bytes);
 }
-

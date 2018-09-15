@@ -6,13 +6,13 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 23:12:05 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/12 23:17:32 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/15 10:06:47 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void		ft_converser_void(t_var var, va_list ap)
+void			ft_converser_void(t_var var, va_list ap)
 {
 	int			len;
 	char		*str;
@@ -28,7 +28,7 @@ void		ft_converser_void(t_var var, va_list ap)
 	ft_converser_finish(str);
 }
 
-static char *ft_base_hexa(t_var var, uint64_t	num)
+static char		*ft_base_hexa(t_var var, uint64_t num)
 {
 	char		*str;
 	char		*tmp;
@@ -53,7 +53,7 @@ static char *ft_base_hexa(t_var var, uint64_t	num)
 	return (str);
 }
 
-void		ft_converser_hexa(t_var var, va_list ap)
+void			ft_converser_hexa(t_var var, va_list ap)
 {
 	int			len;
 	char		*str;
@@ -65,16 +65,16 @@ void		ft_converser_hexa(t_var var, va_list ap)
 	if (var.precision != -1)
 		str = free_str(str, ft_precision_hex(str, var, len, num));
 	if (len == 0 || (num == 0 && var.precision == -1))
-    str = free_str(str, ft_strdup("0"));
+		str = free_str(str, ft_strdup("0"));
 	if (var.precision == 0)
-    str = free_str(str, ft_strdup(""));
+		str = free_str(str, ft_strdup(""));
 	len = ft_strlen(str);
 	if (var.width > len)
 		str = free_str(str, ft_width_int(str, var, len));
 	ft_converser_finish(str);
 }
 
-void		ft_converser_octal(t_var var, va_list ap)
+void			ft_converser_octal(t_var var, va_list ap)
 {
 	int			len;
 	char		*str;
@@ -90,14 +90,14 @@ void		ft_converser_octal(t_var var, va_list ap)
 	if (var.precision != -1 && var.precision > len)
 		str = free_str(str, ft_precision_int(str, var, len));
 	if (num == 0 && var.precision == 0 && !ft_strchr(var.flags, '#'))
-    str = free_str(str, ft_strdup(""));
+		str = free_str(str, ft_strdup(""));
 	len = ft_strlen(str);
 	if (var.width > len)
 		str = free_str(str, ft_width_int(str, var, len));
 	ft_converser_finish(str);
 }
 
-void		ft_converser_long(t_var var, va_list ap)
+void			ft_converser_long(t_var var, va_list ap)
 {
 	int			len;
 	char		*str;
@@ -113,7 +113,7 @@ void		ft_converser_long(t_var var, va_list ap)
 	else
 		str = ft_itoa_base_long(number, 10, "0123456789");
 	if (number == 0 || *str == '\0')
-    str = free_str(str, ft_strdup("0"));
+		str = free_str(str, ft_strdup("0"));
 	len = ft_strlen(str);
 	if (var.precision != -1 && var.precision > len)
 		str = free_str(str, ft_precision_int(str, var, len));

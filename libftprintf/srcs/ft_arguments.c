@@ -6,28 +6,29 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/12 22:50:45 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/15 10:05:06 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-int		ft_conveser(const char *format, va_list	ap)
+int			ft_conveser(const char *format, va_list ap)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	t_var	var;
 
 	j = -1;
 	i = ft_check_type(format, &var);
 	while (++j < N_CONVERSER)
-		(g_converser[j].conv == var.converser) ? g_converser[j].fct(var, ap) : 0;
+		(g_converser[j].conv == var.converser) ?
+			g_converser[j].fct(var, ap) : 0;
 	ft_strdel(&var.flags);
 	ft_strdel(&var.type);
 	return (i);
 }
 
-void	struct_init(t_var *var)
+void		struct_init(t_var *var)
 {
 	var->flags = ft_strnew(0);
 	var->width = 0;
@@ -36,7 +37,7 @@ void	struct_init(t_var *var)
 	var->converser = 0;
 }
 
-int		ft_check_type(const char *str, t_var *var)
+int			ft_check_type(const char *str, t_var *var)
 {
 	int		i;
 
@@ -59,14 +60,14 @@ int		ft_check_type(const char *str, t_var *var)
 	return (i);
 }
 
-int		ft_isflag(char c)
+int			ft_isflag(char c)
 {
 	if (c == '#' || c == ' ' || c == '+' || c == '-' || c == '0')
 		return (1);
 	return (0);
 }
 
-int		ft_istype(const char *str, char **type)
+int			ft_istype(const char *str, char **type)
 {
 	int		i;
 

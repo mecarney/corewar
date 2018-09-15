@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/12 23:16:21 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/15 10:04:21 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 # include "../libft/header/libft.h"
 
-#define CONVERSER "sScCpidDoOuUxX%"
-#define N_CONVERSER	15
+# define CONVERSER		"sScCpidDoOuUxX%"
+# define N_CONVERSER	15
 
 typedef struct	s_var
 {
@@ -63,7 +63,7 @@ void			ft_converser_number(t_var var, va_list ap);
 char			*ft_width_string(char *str, t_var var, int len);
 char			*ft_width_int(char *str, t_var var, int len);
 char			*number_flag(char *str, t_var var, int len);
-char		*ft_itoa_base_long(uint64_t value, int base, const char *basetab);
+char			*ft_itoa_base_long(uint64_t value, int base, const char *btab);
 
 char			*ft_precision_string(char *str, t_var var);
 char			*ft_precision_wstring(wchar_t *wstr, t_var var);

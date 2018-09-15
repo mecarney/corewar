@@ -6,18 +6,18 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/12 23:16:46 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/15 10:04:11 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-char	*ft_width_string(char *str, t_var var, int len)
+char			*ft_width_string(char *str, t_var var, int len)
 {
-	int		i;
-	int		j;
-	char	flags;
-	char	*newstr;
+	int			i;
+	int			j;
+	char		flags;
+	char		*newstr;
 
 	i = -1;
 	j = -1;
@@ -35,13 +35,13 @@ char	*ft_width_string(char *str, t_var var, int len)
 	return (newstr);
 }
 
-char	*ft_width_int(char *str, t_var var, int len)
+char			*ft_width_int(char *str, t_var var, int len)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	flags;
-	char	*newstr;
+	int			i;
+	int			j;
+	int			k;
+	char		flags;
+	char		*newstr;
 
 	k = 0;
 	i = -1;
@@ -61,10 +61,10 @@ char	*ft_width_int(char *str, t_var var, int len)
 	return (newstr);
 }
 
-char	*number_flag(char *str, t_var var, int len)
+char			*number_flag(char *str, t_var var, int len)
 {
-	int		i;
-	char	*newstr;
+	int			i;
+	char		*newstr;
 
 	newstr = ft_strnew(len + 1);
 	if (ft_strchr(var.flags, '+'))
@@ -77,7 +77,7 @@ char	*number_flag(char *str, t_var var, int len)
 	return (newstr);
 }
 
-char		*ft_itoa_base_long(uint64_t value, int base, const char *basetab)
+char			*ft_itoa_base_long(uint64_t value, int base, const char *btab)
 {
 	uint64_t	nbr;
 	size_t		size;
@@ -91,8 +91,8 @@ char		*ft_itoa_base_long(uint64_t value, int base, const char *basetab)
 		return (NULL);
 	str = (str + size);
 	nbr = value;
-	*--str = basetab[nbr % base];
+	*--str = btab[nbr % base];
 	while ((nbr /= base) > 0)
-		*--str = basetab[nbr % base];
+		*--str = btab[nbr % base];
 	return (str);
 }

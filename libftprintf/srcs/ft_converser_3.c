@@ -6,13 +6,13 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 19:35:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/12 23:24:18 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/15 09:55:47 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-static char *number_dispatch(t_var var, va_list ap)
+static char	*number_dispatch(t_var var, va_list ap)
 {
 	char	*str;
 
@@ -31,16 +31,16 @@ static char *number_dispatch(t_var var, va_list ap)
 }
 
 static void	remove_flags(t_var var)
- {
- 	int		i;
+{
+	int		i;
 
- 	i = -1;
- 	while (var.flags[++i])
- 	{
- 		if (var.flags[i] == '0')
- 			var.flags[i] = '1';
- 	}
- }
+	i = -1;
+	while (var.flags[++i])
+	{
+		if (var.flags[i] == '0')
+			var.flags[i] = '1';
+	}
+}
 
 void		ft_converser_number(t_var var, va_list ap)
 {
