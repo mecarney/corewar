@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:46 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/15 09:22:12 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/15 10:32:27 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void				intros(t_vm *vm)
 
 void				validate_p(char *file)
 {
-	int			fd;
+	int				fd;
 
 	if (!file || ft_strcmp(file + ft_strlen(file) - 4, ".cor"))
 		ft_return_error("Error: file has an invalid header");
