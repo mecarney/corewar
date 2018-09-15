@@ -6,11 +6,11 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 20:44:22 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/29 03:45:56 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:36:03 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_asm.h"
+#include "ft_asm.h"
 
 void	ft_error(char *str)
 {

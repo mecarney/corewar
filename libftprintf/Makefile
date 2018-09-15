@@ -6,28 +6,28 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/29 17:14:25 by mjacques          #+#    #+#              #
-#    Updated: 2018/08/29 15:37:07 by mjacques         ###   ########.fr        #
+#    Updated: 2018/09/14 16:48:24 by fhong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				= gcc
-RM				= rm -rf
-NAME			= libftprintf
-NAMELIB		= libftprintf.a
-FLAGS			= -Wall -Wextra -Werror
-LIBFT 		= libft/libft.a
-LIBFTLINK	= -L libft/ -lft
-HEADER		= header/ft_printf.h\
-						libft/header/libft.h
-FILES 		= srcs/ft_printf.c\
-						srcs/ft_arguments.c\
-						srcs/ft_converser_c_s.c\
-						srcs/ft_converser_o_u_x.c\
-						srcs/ft_converser_void_di.c\
-						srcs/ft_converser_helper.c\
-						srcs/ft_helperfunctions.c
+CC			=	gcc
+RM			=	rm -rf
+NAME		=	libftprintf
+NAMELIB		=	libftprintf.a
+FLAGS		=	-Wall -Wextra -Werror
+LIBFT 		=	libft/libft.a
+LIBFTLINK	=	-L libft/ -lft
+HEADER		=	header/ft_printf.h\
+				libft/header/libft.h
+FILES 		=	srcs/ft_printf.c\
+				srcs/ft_arguments.c\
+				srcs/ft_converser_c_s.c\
+				srcs/ft_converser_o_u_x.c\
+				srcs/ft_converser_void_di.c\
+				srcs/ft_converser_helper.c\
+				srcs/ft_helperfunctions.c
 
-OBJECTS		= $(FILES:.c=.o)
+OBJECTS		=	$(FILES:.c=.o)
 
 .PHONY: all clean fclean re
 

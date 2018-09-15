@@ -6,11 +6,11 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 18:17:28 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/29 03:46:20 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:34:57 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_asm.h"
+#include "ft_asm.h"
 
 int		main(int argc, char *argv[])
 {

@@ -6,11 +6,11 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:32:27 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/10 14:08:36 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:06:50 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 void	ft_substraction(t_vm *vm, t_process *p)
 {

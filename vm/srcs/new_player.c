@@ -6,12 +6,11 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:46 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/14 16:21:59 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:07:09 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
-#include <stdio.h>
+#include "ft_corewar.h"
 
 /*
 ** Introduce all players and place them in the arena.

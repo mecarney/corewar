@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 18:14:59 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/29 03:17:10 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:39:13 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "op.h"
 # include "ft_struct.h"
-# include "../libftprintf/header/ft_printf.h"
-# include "../libftprintf/libft/header/libft.h"
+# include "../../libftprintf/header/ft_printf.h"
+# include "../../libftprintf/libft/header/libft.h"
 
 # include <fcntl.h>
 

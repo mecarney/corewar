@@ -6,11 +6,11 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 06:58:57 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/14 15:22:46 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:07:16 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 void			vm_info(t_vm *vm)
 {

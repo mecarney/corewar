@@ -6,11 +6,11 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:59 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/14 15:41:55 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:06:30 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 void		print_arena(t_vm *vm)
 {

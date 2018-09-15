@@ -6,11 +6,11 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 23:57:39 by fhong             #+#    #+#             */
-/*   Updated: 2018/08/29 04:05:02 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:36:36 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_asm.h"
+#include "ft_asm.h"
 
 char	*ft_checklabel(char *label)
 {

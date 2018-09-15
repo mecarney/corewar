@@ -6,11 +6,11 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 23:57:39 by fhong             #+#    #+#             */
-/*   Updated: 2018/08/29 03:46:09 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:36:29 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_asm.h"
+#include "ft_asm.h"
 
 int		find_label_index(t_label *list, char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:03:20 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 15:00:46 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:06:58 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 #define OP_T(op, i)	g_tab[op].param[i]
 

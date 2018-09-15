@@ -6,11 +6,11 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:25 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/14 15:54:07 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:07:02 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 t_op_dispatch		g_dispatch[OP_NUMBER] =
 {

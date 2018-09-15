@@ -6,11 +6,11 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 18:11:05 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/14 15:05:20 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:07:12 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 void			execute_processes(t_process *pro_lst, t_vm *vm)
 {

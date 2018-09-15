@@ -6,11 +6,11 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/08/29 04:06:39 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:36:15 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_asm.h"
+#include "ft_asm.h"
 
 t_line	*structlineinit(char *str)
 {

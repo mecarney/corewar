@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 19:45:48 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 15:37:04 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 16:56:59 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <fcntl.h>
 # include <ncurses.h>
 
-# include "../libftprintf/header/ft_printf.h"
-# include "../libftprintf/libft/header/libft.h"
+# include "../../libftprintf/header/ft_printf.h"
+# include "../../libftprintf/libft/header/libft.h"
 # include "op.h"
 
 # define UINT unsigned int

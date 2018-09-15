@@ -6,11 +6,11 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:07:42 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 08:43:47 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:06:46 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 void	ft_null(t_vm *vm, t_process *p)
 {

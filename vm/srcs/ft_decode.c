@@ -6,11 +6,11 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 00:22:43 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/07 14:56:50 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/14 17:06:38 by fhong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_corewar.h"
+#include "ft_corewar.h"
 
 int		ft_instruction_edge(t_process *p, UCHAR op)
 {
