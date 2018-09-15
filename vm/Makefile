@@ -6,7 +6,7 @@
 #    By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/29 10:41:39 by mcarney           #+#    #+#              #
-#    Updated: 2018/09/14 17:13:59 by fhong            ###   ########.fr        #
+#    Updated: 2018/09/14 18:07:04 by mcarney          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ $(LIBFTPRINTF):
 	@make -C ../libftprintf
 
 $(NAME): $(LIBFTPRINTF) $(OBJECTS)
-	@$(CC) -o $(NAME) $(OBJECTS) $(API) $(LIBFTPRINTFLINK) $(LIBFTLINK) -g -fsanitize=address
+	@$(CC) -o $(NAME) $(OBJECTS) $(API) $(LIBFTPRINTFLINK) $(LIBFTLINK)
 	@echo "\t\t\033[32mDone!\033[0m"
 	@echo "\033[33mPrepare your champs, it's time to fight!\033[0m"
 
