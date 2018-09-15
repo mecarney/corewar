@@ -6,29 +6,29 @@
 #    By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/14 17:21:31 by mcarney           #+#    #+#              #
-#    Updated: 2018/09/14 17:36:32 by mcarney          ###   ########.fr        #
+#    Updated: 2018/09/15 10:15:48 by mcarney          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar_project
-COREWAR = vm/corewar
 ASM = asm/asm
+COREWAR = vm/corewar
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
-
-corewar: $(COREWAR)
-
-$(COREWAR):
-	@make -C vm
 
 asm: $(ASM)
 
 $(ASM):
 	@make -C asm
 
-$(NAME): $(COREWAR) $(ASM)
+corewar: $(COREWAR)
+
+$(COREWAR):
+	@make -C vm
+
+$(NAME): $(ASM) $(COREWAR)
 
 clean:
 	@make clean -C vm
