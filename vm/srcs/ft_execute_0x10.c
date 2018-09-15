@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:33:34 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 17:06:54 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/14 17:40:37 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ void		ft_aff(t_vm *vm, t_process *p)
 {
 	UCHAR	ascii;
 
-	if (vm && ft_check_param(p, p->op))
+	if (ft_check_param(p, p->op))
 	{
 		ascii = (p->reg[REG(0)] % 256);
-		(ft_isascii((int)ascii)) ? ft_printf("%c\n", ascii) : 0;
+		if (vm->v & 1)
+			(ft_isascii((int)ascii)) ? mvprintw(65, 195, "%c\n", ascii) : 0;
+		else
+			(ft_isascii((int)ascii)) ? ft_printf("%c\n", ascii) : 0;
 	}
 	p->pc = modify_pc(p->pc + p->size_instruction);
 }

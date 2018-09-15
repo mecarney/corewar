@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/10 06:58:57 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/14 17:07:16 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/14 18:01:09 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			decorate_win(t_vm *vm)
 	mvprintw(3, 210, "%d", vm->nbr_of_processes);
 	vm_info(vm);
 	refresh();
-	(vm->vm_cycle > 1000004400) ? getch() : 0;
+	(vm->vm_cycle % 1 == 0) ? getch() : 0;
 }
 
 void			base(t_vm *vm)
