@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 23:57:39 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:36 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 03:11:51 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_checklabel(char *label)
 	{
 		if (!ft_strchr(LABEL_CHARS, label[i]))
 		{
-			free(label);
+			ft_strdel(&label);
 			ft_error("ERROR: invalid Label");
 		}
 	}
@@ -74,5 +74,28 @@ void	print_op(t_label *list, int file)
 			line_tmp = line_tmp->next;
 		}
 		list = list->next;
+	}
+}
+
+void	structfree(t_label *list)
+{
+	t_label	*tmp_label;
+	t_line	*tmp_line;
+
+	while (list)
+	{
+		tmp_label = list;
+		list = list->next;
+		ft_strdel(&tmp_label->label);
+		while (tmp_label->line)
+		{
+			tmp_line = tmp_label->line;
+			tmp_label->line = tmp_label->line->next;
+			free(tmp_line->op);
+			free(tmp_line);
+			tmp_line = NULL;
+		}
+		free(tmp_label);
+		tmp_label = NULL;
 	}
 }

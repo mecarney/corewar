@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 23:57:39 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:29 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 03:17:00 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ int		find_label_index(t_label *list, char *str)
 	while (list)
 	{
 		if (list->label && ft_strcmp(str_label, list->label) == 0)
+		{
+			ft_strdel(&str_label);
 			return (list->index);
+		}
 		list = list->next;
 	}
+	ft_strdel(&str_label);
 	return (-1);
 }
 

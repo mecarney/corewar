@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 18:14:59 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 16:39:13 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 03:35:40 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	copy_g_op(t_op *op, t_op tab);
 char	*ft_checklabel(char *label);
 int		print_line(t_line *line, t_label *label, int file, int index);
 void	print_op(t_label *list, int file);
+void	structfree(t_label *list);
 
 /*
 ** ft_print_op_helper.c

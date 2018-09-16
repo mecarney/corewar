@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:15 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 02:52:17 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	ft_addline(char *str, int position, t_label *element)
 	tmp = element->line;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = structlineinit(ft_strlcpy(&str[position], len - position));
+	tmp->next = structlineinit(ft_strmcpy(&str[position], len - position));
 	if (element->line->str == NULL)
 		element->line = element->line->next;
-	free(str);
+	ft_strdel(&str);
 }
 
 int		ft_addlabel(char *str, char **element)
@@ -64,7 +64,7 @@ int		ft_addlabel(char *str, char **element)
 	{
 		if ((point = (tmp - str)) > 0 && str[point - 1] != '%'
 			&& ft_strchr(LABEL_CHARS, str[point - 1]))
-			*element = ft_strlcpy(str, point);
+			*element = ft_strmcpy(str, point);
 		point = ((!ft_strchr(LABEL_CHARS, str[point - 1])) ? 0 : point + 1);
 	}
 	return (point);

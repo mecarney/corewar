@@ -6,7 +6,7 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/09 11:32:00 by mjacques          #+#    #+#              #
-#    Updated: 2018/09/15 10:15:01 by mcarney          ###   ########.fr        #
+#    Updated: 2018/09/16 03:10:20 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ FILES			= 		srcs/ft_atoi.c\
 						srcs/ft_striteri.c\
 						srcs/ft_strjoin.c\
 						srcs/ft_strlcat.c\
-						srcs/ft_strlcpy.c\
 						srcs/ft_strlen.c\
 						srcs/ft_strmap.c\
 						srcs/ft_strmapi.c\

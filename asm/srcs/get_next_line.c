@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 20:54:33 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:46 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 02:15:56 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		get_next_line(const int fd, char **line)
 	}
 	var.size = (int)(var.pos - str[fd]);
 	(!var.pos) ? (var.size = ft_strlen(str[fd])) : 0;
-	*line = ft_strlcpy(str[fd], var.size);
+	*line = ft_strmcpy(str[fd], var.size);
 	(var.pos) ? (var.size += 1) : 0;
 	var.tmp = ft_strdup(&str[fd][var.size]);
 	ft_strdel(&str[fd]);

@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:59:24 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:09 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 03:35:09 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int		fillheader(char *line, char *str, int size)
 	due = ft_strrchr(line, '\"');
 	if (!uno || !due || due - uno == 0 || (due - uno - 1) > size)
 	{
-		free(line);
+		ft_strdel(&line);
 		if (size == PROG_NAME_LENGTH)
 			ft_error("ERROR: name too long or unvalid");
 		else
 			ft_error("ERROR: comment too long or unvalid");
 	}
 	ft_strncpy(str, (uno + 1), due - uno - 1);
-	free(line);
+	ft_strdel(&line);
 	return (1);
 }
 
@@ -81,6 +81,9 @@ void	fillthefile(t_label *list, t_header head, int file)
 		ft_putcharsize_fd(head.comment[i], file, 1);
 	while (i++ < COMMENT_LENGTH + 4)
 		ft_putcharsize_fd(0, file, 1);
+	print_op(list, file);
+	close(file);
+	ft_printf("You create a new Champion: %s\n", head.prog_name);
 }
 
 void	addtofile(int openfile, char *namefile)
@@ -103,10 +106,8 @@ void	addtofile(int openfile, char *namefile)
 		else
 			makestruct(line, list, file);
 	}
-	file = open(namefile, O_RDWR | O_CREAT | O_TRUNC, 00777);
+	if (!(file = open(namefile, O_RDWR | O_CREAT | O_TRUNC, 0766)))
+		ft_error("ERROR: Can't create the file");
 	fillthefile(list, head, file);
-	print_op(list, file);
-	close(file);
-	if (open(namefile, O_RDONLY) > 0)
-		ft_printf("You create a new Champion: %s\n", head.prog_name);
+	structfree(list);
 }

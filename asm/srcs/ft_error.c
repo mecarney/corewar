@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 20:44:22 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:03 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 03:35:02 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	ft_printstruct(t_label *label)
 	t_line	*tmpline;
 
 	tmp = label;
-	while (tmp != NULL)
+	while (tmp)
 	{
 		ft_printf("%s | %d\n", tmp->label, tmp->index);
 		tmpline = tmp->line;
-		while (tmpline != NULL)
+		while (tmpline)
 		{
 			ft_printf("\t%s | %d\n", tmpline->str, tmpline->size);
 			tmpline = tmpline->next;
