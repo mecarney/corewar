@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 19:45:48 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 16:56:59 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 08:42:51 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct		s_vm
 	unsigned int	last_live[MAX_PLAYERS];
 	t_player		p[MAX_PLAYERS];
 	unsigned int	nbr_lives;
+	unsigned int	winner;
 
 	unsigned int	v : 1;
 }					t_vm;

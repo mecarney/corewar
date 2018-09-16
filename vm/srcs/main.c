@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:25 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/15 14:37:32 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/16 08:59:31 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,16 +162,20 @@ void				defaults(t_vm *vm)
 int					main(int ac, char **av)
 {
 	t_vm			vm;
+	int				i;
 
 	if (ac == 1)
 	{
 		ft_putstr("./corewar [-v] [-dump nbr_cycles] [[-n number]");
 		ft_return_error(" champion1.cor]");
 	}
+	i = -1;
 	defaults(&vm);
 	parse_av(ac, av, &vm);
 	(vm.nbrp < 1) ? ft_return_error("Not enough players.") : 0;
 	intros(&vm);
+	while (++i < MAX_PLAYERS)
+		(vm.p[i].size) ? vm.winner = i : 0;
 	(vm.v & 1) ? visualizer(&vm) : start(&vm);
 	return (0);
 }

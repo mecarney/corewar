@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:46 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/15 14:22:04 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/16 08:57:44 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void				intros(t_vm *vm)
 	unsigned int	y;
 
 	i = -1;
-	ft_putendl("Introducing contestants...");
 	y = 0;
+	ft_putendl("Introducing contestants...");
 	while (++i < MAX_PLAYERS)
 		if (vm->p[i].size)
 		{
