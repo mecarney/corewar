@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 23:57:39 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/16 18:17:53 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/17 15:40:58 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,11 @@ char	*ft_checklabel(char *label)
 	return (label);
 }
 
-int		print_line(t_line *line, t_label *label, int file, int index)
+void	get_print_type(t_line *line, t_label *label, int file, int index)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	ft_putcharsize_fd(line->op->opcode, file, 1);
-	if (line->op->is_coding_byte == 1)
-		print_arg_type(line->op->p, file);
-	line->str += ft_strlen(line->op->op_name);
 	while (i < line->op->arg_nbr)
 	{
 		while (*line->str && ft_isspace(*line->str))
@@ -54,6 +50,21 @@ int		print_line(t_line *line, t_label *label, int file, int index)
 			line->str++;
 		i++;
 	}
+}
+
+int		print_line(t_line *line, t_label *label, int file, int index)
+{
+	int		i;
+	char	*begin_str;
+
+	i = 0;
+	begin_str = line->str;
+	ft_putcharsize_fd(line->op->opcode, file, 1);
+	if (line->op->is_coding_byte == 1)
+		print_arg_type(line->op->p, file);
+	line->str += ft_strlen(line->op->op_name);
+	get_print_type(line, label, file, index);
+	line->str = begin_str;
 	return (index + line->size);
 }
 
@@ -91,6 +102,7 @@ void	structfree(t_label *list)
 		{
 			tmp_line = tmp_label->line;
 			tmp_label->line = tmp_label->line->next;
+			(tmp_line->str) ? ft_strdel(&tmp_line->str) : NULL;
 			ft_strdel(&tmp_line->op->op_name);
 			ft_strdel(&tmp_line->op->comment);
 			free(tmp_line->op);
