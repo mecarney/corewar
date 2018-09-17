@@ -6,7 +6,7 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/21 18:11:36 by mjacques          #+#    #+#              #
-#    Updated: 2018/09/15 13:56:21 by mcarney          ###   ########.fr        #
+#    Updated: 2018/09/17 15:31:05 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ all: $(NAME)
 
 $(OBJECTS): $(FILES)
 	@echo -n 'Compiling asm...'
-	@$(CC) $(FLAGS) -c $(FILES) -I ./header
+	@$(CC) $(FLAGS) -g -c $(FILES) -I ./header
 	@mv *.o 	srcs/
 
 libftprintf: $(LIBFTPRINTF)

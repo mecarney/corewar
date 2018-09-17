@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/16 18:09:25 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/17 15:29:47 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_line	*structlineinit(char *str)
 
 	if (!(new = (t_line *)malloc(sizeof(t_line))))
 		return (NULL);
-	new->str = str;
+	new->str = (str) ? ft_strdup(str) : NULL;
 	if (!(new->op = (t_op *)malloc(sizeof(t_op))))
 		return (NULL);
 	new->size = get_index(str, new->op);
