@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:59:24 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/16 03:35:09 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/16 17:55:01 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	addtofile(int openfile, char *namefile)
 	while (get_next_line(openfile, &line) > 0)
 	{
 		if (ft_command_line(line) == 1)
-			free(line);
+			ft_strdel(&line);
 		else if (ft_strstr(line, NAME_CMD_STRING) != NULL)
 			file += fillheader(line, head.prog_name, PROG_NAME_LENGTH);
 		else if (ft_strstr(line, COMMENT_CMD_STRING) != NULL)

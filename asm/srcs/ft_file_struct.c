@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/16 02:52:17 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/16 18:09:25 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,18 @@ t_label	*structlabelinit(char *str)
 void	ft_addline(char *str, int position, t_label *element)
 {
 	int		len;
+	char	*line;
 	t_line	*tmp;
 
 	len = ft_strlen(str);
 	tmp = element->line;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = structlineinit(ft_strmcpy(&str[position], len - position));
+	line = ft_strmcpy(&str[position], len - position);
+	tmp->next = structlineinit(line);
 	if (element->line->str == NULL)
 		element->line = element->line->next;
+	ft_strdel(&line);
 	ft_strdel(&str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 15:30:56 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/14 16:36:19 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/16 17:53:51 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ int		find_op(char **line)
 			check_parameter(i, line);
 			while (!ft_isspace(**line))
 				(*line)++;
+			ft_strdel(&op_name);
 			return (i);
 		}
 	}
+	ft_strdel(&op_name);
 	ft_error("ERROR: op_code unvalid");
 	return (-1);
 }

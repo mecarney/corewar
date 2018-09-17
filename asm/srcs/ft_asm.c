@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 18:17:28 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/16 03:27:26 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/16 18:19:38 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,14 @@ int		main(int argc, char *argv[])
 
 void	ft_putcharsize_fd(int32_t x, int fd, size_t size)
 {
-	if (size == 1)
-		write(fd, &x, size);
-	else if (size == 2)
-	{
+	if (size == 2)
 		x = (((x >> 8) & 0xff) | ((x << 8) & 0xff00));
-		write(fd, &x, size);
-	}
 	else if (size == 4)
 	{
 		x = ((x >> 24) & 0xff) | ((x << 8) & 0xff0000) |
 				((x >> 8) & 0xff00) | ((x << 24) & 0xff000000);
-		write(fd, &x, size);
 	}
+	write(fd, &x, size);
 }
 
 char	*ft_corextension(char *str)

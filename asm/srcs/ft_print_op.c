@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 23:57:39 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/16 03:11:51 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/16 18:17:53 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ void	structfree(t_label *list)
 		{
 			tmp_line = tmp_label->line;
 			tmp_label->line = tmp_label->line->next;
+			ft_strdel(&tmp_line->op->op_name);
+			ft_strdel(&tmp_line->op->comment);
 			free(tmp_line->op);
+			tmp_line->op = NULL;
 			free(tmp_line);
 			tmp_line = NULL;
 		}
