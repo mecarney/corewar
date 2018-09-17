@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:59 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/15 09:22:08 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/16 08:51:10 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@ void		print_arena(t_vm *vm)
 		ft_printf("%.2x ", vm->arena[i]);
 		((i + 1) % 64 == 0) ? ft_printf("\n") : 0;
 	}
-}
-
-int			ft_champs_return(t_vm *vm)
-{
-	int		i;
-	int		player;
-
-	i = -1;
-	while (++i < MAX_PLAYERS)
-		(vm->p[i].size) ? player = i : 0;
-	i = -1;
-	while (++i < MAX_PLAYERS)
-	{
-		if (vm->p[i].size && vm->last_live[i] > vm->last_live[player])
-			player = i;
-	}
-	return (player);
 }
 
 void		loop(t_vm *vm, int i)
@@ -94,7 +77,7 @@ void		start(t_vm *vm)
 	else
 	{
 		(vm->v & 1) ? endwin() : 0;
-		i = ft_champs_return(vm);
-		ft_printf("Contestant %d, \"%s\", has won !\n", i + 1, vm->p[i].name);
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+					vm->winner + 1, vm->p[vm->winner].name);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:25 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/15 09:52:08 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/16 08:59:31 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_op	g_tab[OP_NUMBER] =
 
 void				dump_flag(int ac, char **av, t_vm *vm, int *i)
 {
-	if (*i + 1 < ac && ft_atoi(av[*i + 1]))
+	if (*i + 1 < ac && ft_atoi(av[*i + 1]) > 0)
 	{
 		vm->dump_cycle = ft_atoi(av[*i + 1]);
 		*i += 1;
@@ -85,7 +85,8 @@ void				n_flag(int ac, char **av, t_vm *vm, int *i)
 {
 	char			*s;
 
-	if (!(ft_atoi(av[*i + 1]) <= MAX_PLAYERS && ft_atoi(av[*i + 1]) != 0))
+	if (*i + 1 < ac
+		&& !(ft_atoi(av[*i + 1]) <= MAX_PLAYERS && ft_atoi(av[*i + 1]) != 0))
 		ft_return_error("Error: invalid player number");
 	else if (*i + 1 < ac && '0' < av[*i + 1][0]
 		&& *i + 2 < ac && (s = ft_strstr(av[*i + 2], ".cor"))
@@ -161,16 +162,20 @@ void				defaults(t_vm *vm)
 int					main(int ac, char **av)
 {
 	t_vm			vm;
+	int				i;
 
 	if (ac == 1)
 	{
 		ft_putstr("./corewar [-v] [-dump nbr_cycles] [[-n number]");
 		ft_return_error(" champion1.cor]");
 	}
+	i = -1;
 	defaults(&vm);
 	parse_av(ac, av, &vm);
 	(vm.nbrp < 1) ? ft_return_error("Not enough players.") : 0;
 	intros(&vm);
+	while (++i < MAX_PLAYERS)
+		(vm.p[i].size) ? vm.winner = i : 0;
 	(vm.v & 1) ? visualizer(&vm) : start(&vm);
 	return (0);
 }
