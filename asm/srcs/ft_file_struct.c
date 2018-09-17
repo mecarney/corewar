@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/17 15:29:47 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/17 16:36:48 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_addline(char *str, int position, t_label *element)
 	int		len;
 	char	*line;
 	t_line	*tmp;
+	t_line	*empty;
 
 	len = ft_strlen(str);
 	tmp = element->line;
@@ -52,7 +53,12 @@ void	ft_addline(char *str, int position, t_label *element)
 	line = ft_strmcpy(&str[position], len - position);
 	tmp->next = structlineinit(line);
 	if (element->line->str == NULL)
+	{
+		empty = element->line;
 		element->line = element->line->next;
+		free(empty->op);
+		free(empty);
+	}
 	ft_strdel(&line);
 	ft_strdel(&str);
 }
