@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/17 16:36:48 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/17 20:36:45 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ t_line	*structlineinit(char *str)
 {
 	t_line	*new;
 
+	if (!str)
+		return (new = NULL);
 	if (!(new = (t_line *)malloc(sizeof(t_line))))
 		return (NULL);
-	new->str = (str) ? ft_strdup(str) : NULL;
+	new->str = ft_strdup(str);
 	if (!(new->op = (t_op *)malloc(sizeof(t_op))))
 		return (NULL);
 	new->size = get_index(str, new->op);
@@ -44,21 +46,18 @@ void	ft_addline(char *str, int position, t_label *element)
 	int		len;
 	char	*line;
 	t_line	*tmp;
-	t_line	*empty;
 
 	len = ft_strlen(str);
-	tmp = element->line;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
 	line = ft_strmcpy(&str[position], len - position);
-	tmp->next = structlineinit(line);
-	if (element->line->str == NULL)
+	if (element->line)
 	{
-		empty = element->line;
-		element->line = element->line->next;
-		free(empty->op);
-		free(empty);
+		tmp = element->line;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = structlineinit(line);
 	}
+	else
+		element->line = structlineinit(line);
 	ft_strdel(&line);
 	ft_strdel(&str);
 }
@@ -91,7 +90,7 @@ void	makestruct(char *str, t_label *list, int nbr)
 		list = list->next;
 	if ((position = ft_addlabel(str, &element)) > 0)
 	{
-		if (list->line->str == NULL && list->label == NULL)
+		if (list->line == NULL && list->label == NULL)
 			list->label = ft_checklabel(element);
 		else
 		{
