@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/17 20:36:45 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/17 20:45:37 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_label	*structlabelinit(char *str)
 	if (!(new = (t_label *)malloc(sizeof(t_label))))
 		return (NULL);
 	new->label = str;
-	new->line = structlineinit(NULL);
+	new->line = NULL;
 	new->index = 0;
 	new->next = NULL;
 	return (new);
