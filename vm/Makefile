@@ -6,7 +6,7 @@
 #    By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/29 10:41:39 by mcarney           #+#    #+#              #
-#    Updated: 2018/09/15 13:56:30 by mcarney          ###   ########.fr        #
+#    Updated: 2018/09/17 18:23:18 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ CC				= 	gcc
 RM				=	rm -rf
 NAME			=	corewar
 FLAGS			=	-Wall -Wextra -Werror
-LIBFTLINK		=	-L ../libftprintf/libft/ -lft
 LIBFTPRINTF 	=	../libftprintf/lftprintf.a
 LIBFTPRINTFLINK	=	-L ../libftprintf/ -lftprintf
 API				=	-lncurses
@@ -52,7 +51,7 @@ $(LIBFTPRINTF):
 	@make -C ../libftprintf
 
 $(NAME): $(LIBFTPRINTF) $(OBJECTS)
-	@$(CC) -o $(NAME) $(OBJECTS) $(API) $(LIBFTPRINTFLINK) $(LIBFTLINK)
+	@$(CC) -o $(NAME) $(OBJECTS) $(API) $(LIBFTPRINTFLINK)
 	@echo "\t\t\033[32mDone!\033[0m"
 	@echo "\033[33mPrepare your champs, it's time to fight!\033[0m"
 

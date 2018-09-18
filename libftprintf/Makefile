@@ -6,7 +6,7 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/10 19:23:19 by mjacques          #+#    #+#              #
-#    Updated: 2018/09/15 14:11:17 by mcarney          ###   ########.fr        #
+#    Updated: 2018/09/17 18:25:07 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ RM			= rm -rf
 NAME		= libftprintf
 NAMELIB		= libftprintf.a
 FLAGS		= -Wall -Wextra -Werror
+LIBFTPATH	= libft
 LIBFT 		= $(addprefix $(LIBFTPATH)/, libft.a)
 HEADER		= header/ft_printf.h\
 			  libft/header/libft.h
@@ -44,6 +45,7 @@ $(LIBFT):
 	@make -C libft
 
 $(NAMELIB): $(LIBFT) $(OBJECTS)
+	@cp $(LIBFT) $(NAMELIB)
 	@ar rc $(NAMELIB) $(OBJECTS)
 	@ranlib $(NAMELIB)
 	@echo "\t\033[32mDone!\033[0m"

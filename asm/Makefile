@@ -6,7 +6,7 @@
 #    By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/21 18:11:36 by mjacques          #+#    #+#              #
-#    Updated: 2018/09/17 15:31:05 by mjacques         ###   ########.fr        #
+#    Updated: 2018/09/17 18:21:25 by mjacques         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ CC				= 	gcc
 RM				=	rm -rf
 NAME			=	asm
 FLAGS			=	-Wall -Wextra -Werror
-LIBFTLINK		=	-L ../libftprintf/libft/ -lft
 LIBFTPRINTF 	=	../libftprintf/lftprintf.a
 LIBFTPRINTFLINK	=	-L ../libftprintf/ -lftprintf
 HEADER			=	header/op.h\
@@ -49,7 +48,7 @@ $(LIBFTPRINTF):
 	@make -C ../libftprintf
 
 $(NAME): $(LIBFTPRINTF) $(OBJECTS)
-	@$(CC) -o $(NAME) $(OBJECTS) $(LIBFTPRINTFLINK) $(LIBFTLINK)
+	@$(CC) -o $(NAME) $(OBJECTS) $(LIBFTPRINTFLINK)
 	@echo "\t\t\033[32mDone!\033[0m"
 	@echo "\033[33mReady to make champs!\033[0m"
 
