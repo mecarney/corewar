@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 18:14:59 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/17 15:40:45 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/19 11:25:39 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include <fcntl.h>
 
-void	ft_putcharsize_fd(int32_t x, int fd, size_t size);
+void	ft_putcharsize_fd(uint32_t x, int fd, size_t size);
 char	*ft_corextension(char *str);
 int		ft_isspace(char c);
 
