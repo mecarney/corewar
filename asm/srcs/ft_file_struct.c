@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:37:39 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/17 20:45:37 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/19 13:20:34 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	makestruct(char *str, t_label *list, int nbr)
 	}
 	while (str[position] && ft_isspace(str[position]))
 		position++;
-	if (str[position])
+	if (str[position] && str[position] != '#')
 		ft_addline(str, position, list);
 }

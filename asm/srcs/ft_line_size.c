@@ -6,7 +6,7 @@
 /*   By: fhong <fhong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 15:30:56 by fhong             #+#    #+#             */
-/*   Updated: 2018/09/16 17:53:51 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:54:48 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		find_op(char **line)
 		}
 	}
 	ft_strdel(&op_name);
-	ft_error("ERROR: op_code unvalid");
+	ft_error("ERROR: op_code invalid");
 	return (-1);
 }
 

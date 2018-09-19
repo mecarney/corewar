@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:59:24 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/17 20:32:02 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:54:42 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		fillheader(char *line, char *str, int size)
 	{
 		ft_strdel(&line);
 		if (size == PROG_NAME_LENGTH)
-			ft_error("ERROR: name too long or unvalid");
+			ft_error("ERROR: name too long or invalid");
 		else
-			ft_error("ERROR: comment too long or unvalid");
+			ft_error("ERROR: comment too long or invalid");
 	}
 	ft_strncpy(str, (uno + 1), due - uno - 1);
 	ft_strdel(&line);
