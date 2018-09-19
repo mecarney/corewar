@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:46 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/19 10:52:53 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/19 11:05:39 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void				store_p(char *file, t_vm *vm, int nbr)
 		if (*(unsigned int *)magic_number != COREWAR_EXEC_MAGIC)
 			ft_return_error("Error: invalid magic_number");
 		read(fd, &(vm->p[nbr].name), PROG_NAME_LENGTH + 4);
+		if (!(vm->p[nbr].name[0]))
+			ft_return_error("Error: Champ needs a name");
 		lseek(fd, 4, SEEK_CUR);
 		read(fd, &(vm->p[nbr].comment), COMMENT_LENGTH + 4);
 		size = read(fd, &(vm->p[nbr].code), CHAMP_MAX_SIZE);
