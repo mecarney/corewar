@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 20:59:24 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/19 12:54:42 by mjacques         ###   ########.fr       */
+/*   Updated: 2018/09/19 13:54:32 by mjacques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	addtofile(int openfile, char *namefile)
 		else
 			makestruct(line, list, file);
 	}
-	if (!(file = open(namefile, O_RDWR | O_CREAT | O_TRUNC, 0766)))
+	if (!(file = open(namefile, O_RDWR | O_CREAT | O_TRUNC, 0666)))
 		ft_error("ERROR: Can't create the file");
 	fillthefile(list, head, file);
 	structfree(list);
