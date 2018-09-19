@@ -6,7 +6,7 @@
 /*   By: mcarney <mcarney@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 10:41:46 by mcarney           #+#    #+#             */
-/*   Updated: 2018/09/16 08:57:44 by mcarney          ###   ########.fr       */
+/*   Updated: 2018/09/19 10:52:53 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				validate_p(char *file)
 	if ((fd = open(file, O_RDONLY)) != -1)
 	{
 		if (lseek(fd, 0, SEEK_END) - sizeof(t_header) > CHAMP_MAX_SIZE)
-			ft_return_error("Error: file has too large a code");
+			ft_return_error("Error: file is too large");
 	}
 	else
 		ft_return_error("Error: can't read source file");
@@ -84,14 +84,12 @@ void				store_p(char *file, t_vm *vm, int nbr)
 		read(fd, &magic_number[0], 1);
 		if (*(unsigned int *)magic_number != COREWAR_EXEC_MAGIC)
 			ft_return_error("Error: invalid magic_number");
-		size = read(fd, &(vm->p[nbr].name), PROG_NAME_LENGTH + 4);
-		vm->p[nbr].name[size] = '\0';
+		read(fd, &(vm->p[nbr].name), PROG_NAME_LENGTH + 4);
 		lseek(fd, 4, SEEK_CUR);
-		size = read(fd, &(vm->p[nbr].comment), COMMENT_LENGTH + 4);
-		vm->p[nbr].comment[size] = '\0';
+		read(fd, &(vm->p[nbr].comment), COMMENT_LENGTH + 4);
 		size = read(fd, &(vm->p[nbr].code), CHAMP_MAX_SIZE);
-		vm->p[nbr].code[size] = '\0';
-		vm->p[nbr].size = size;
+		(size) ? vm->p[nbr].size = size :
+			ft_return_error("Error: invalid Champ size");
 		vm->p[nbr].nbr = nbr + 1;
 	}
 	else

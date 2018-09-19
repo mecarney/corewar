@@ -6,7 +6,7 @@
 /*   By: mjacques <mjacques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:03:20 by mjacques          #+#    #+#             */
-/*   Updated: 2018/09/14 17:06:58 by fhong            ###   ########.fr       */
+/*   Updated: 2018/09/19 10:47:50 by mcarney          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 void				ft_param(int *param, UCHAR *arena, int pc, int size)
 {
-	int tmp;
-	int nbr;
+	unsigned int tmp;
+	unsigned int nbr;
 	int len;
 
 	nbr = 0;
